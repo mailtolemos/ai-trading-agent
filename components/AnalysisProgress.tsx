@@ -2,7 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 
-const STEPS = [
+interface Step {
+  number: number;
+  name: string;
+  status: 'pending' | 'running' | 'completed';
+}
+
+const STEPS: Step[] = [
   { number: 1, name: 'Fetch Prices', status: 'pending' },
   { number: 2, name: 'News Analysis', status: 'pending' },
   { number: 3, name: 'Sentiment Check', status: 'pending' },
@@ -13,7 +19,7 @@ const STEPS = [
 ];
 
 export default function AnalysisProgress() {
-  const [steps, setSteps] = useState(STEPS);
+  const [steps, setSteps] = useState<Step[]>(STEPS);
   const [progress, setProgress] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
 
@@ -29,9 +35,11 @@ export default function AnalysisProgress() {
           const currentStep = Math.floor(Math.random() * 7);
           
           for (let i = 0; i < currentStep; i++) {
-            newSteps[i].status = 'completed';
+            if (newSteps[i]) {
+              newSteps[i].status = 'completed';
+            }
           }
-          if (currentStep < 7) {
+          if (currentStep < 7 && newSteps[currentStep]) {
             newSteps[currentStep].status = 'running';
           }
           
@@ -126,8 +134,8 @@ export default function AnalysisProgress() {
       {/* Step details */}
       <div className="mt-4 pt-4 border-t border-terminal-border text-xs text-terminal-muted">
         <p>
-          {steps[0].status === 'pending' && '⏳ Waiting to start...'}
-          {steps.map((s) => s.status).includes('running') &&
+          {steps[0]?.status === 'pending' && '⏳ Waiting to start...'}
+          {steps.some((s) => s.status === 'running') &&
             `→ Running step ${steps.findIndex((s) => s.status === 'running') + 1}/7`}
           {steps.every((s) => s.status === 'completed') && '✓ Analysis complete'}
         </p>
