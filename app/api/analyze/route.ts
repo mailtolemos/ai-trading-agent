@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Analysis workflow triggered',
-      eventId: result[0]?.ids?.[0],
+      eventId: result?.ids?.[0] || result?.id || 'triggered',
     });
   } catch (error) {
     console.error('Error triggering analysis:', error);
