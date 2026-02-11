@@ -163,8 +163,9 @@ function getMockSentiment(): SentimentAnalysis {
 
 function getMockSignal(): TradingSignal {
   const actions: Array<'BUY' | 'SELL' | 'HOLD'> = ['BUY', 'SELL', 'HOLD'];
+  const randomAction = actions[Math.floor(Math.random() * actions.length)] as 'BUY' | 'SELL' | 'HOLD';
   return {
-    action: actions[Math.floor(Math.random() * actions.length)],
+    action: randomAction,
     confidence: Math.floor(Math.random() * 40) + 50,
     reasoning: 'Analysis based on available market data and technical indicators',
   };
