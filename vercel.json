@@ -3,32 +3,9 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "env": [
-    "NEXT_PUBLIC_SUPABASE_URL",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY",
-    "SUPABASE_SERVICE_ROLE_KEY",
-    "GOOGLE_AI_API_KEY",
-    "INNGEST_EVENT_KEY",
-    "INNGEST_SIGNING_KEY",
-    "NEWSAPI_API_KEY",
-    "GITHUB_API_TOKEN",
-    "GLASSNODE_API_KEY",
-    "MESSARI_API_KEY"
-  ],
   "functions": {
     "app/api/**": {
       "maxDuration": 60
     }
-  },
-  "headers": [
-    {
-      "source": "/api/inngest",
-      "headers": [
-        {
-          "key": "X-Inngest-Server",
-          "value": "true"
-        }
-      ]
-    }
-  ]
+  }
 }
