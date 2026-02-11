@@ -59,6 +59,11 @@ export default function Terminal() {
     }
   };
 
+  const getTimeString = (timestamp: string) => {
+    const parts = timestamp.split('T');
+    return parts[1]?.slice(0, 8) || '00:00:00';
+  };
+
   return (
     <div className="glow-border bg-terminal-bg bg-opacity-50 rounded p-4 font-mono text-sm max-h-64 overflow-y-auto">
       <div className="mb-3 pb-3 border-b border-terminal-border">
@@ -67,7 +72,7 @@ export default function Terminal() {
       <div className="space-y-1">
         {logs.map((log) => (
           <div key={log.id} className="flex space-x-3 text-xs">
-            <span className="text-terminal-muted">{log.timestamp.split('T')[1].slice(0, 8)}</span>
+            <span className="text-terminal-muted">{getTimeString(log.timestamp)}</span>
             <span className={getMessageColor(log.type)}>▸</span>
             <span className="text-terminal-muted flex-1">{log.message}</span>
           </div>
