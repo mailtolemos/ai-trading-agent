@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Trigger the complete analysis workflow
-    const result = await inngest.send({
+    await inngest.send({
       name: 'trading/analyze',
       data: {
         timestamp: new Date().toISOString(),
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Analysis workflow triggered',
-      eventId: result?.id || 'triggered',
+      eventId: 'triggered',
     });
   } catch (error) {
     console.error('Error triggering analysis:', error);
