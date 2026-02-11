@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Trigger the complete analysis workflow
-    const result: any = await inngest.send({
+    const result = await inngest.send({
       name: 'trading/analyze',
       data: {
         timestamp: new Date().toISOString(),
